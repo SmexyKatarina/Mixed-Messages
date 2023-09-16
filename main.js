@@ -59,7 +59,7 @@ const start = () =>
 {
     let repeat = 0;
     let saidJoke = false;
-    while (repeat < 10) 
+    while (repeat < 3) 
     {
         const hearJoke = prompt(!saidJoke ? 'Do you want to hear a joke? ' : 'Do you want to hear another one? ');
         switch (hearJoke) 
@@ -81,6 +81,7 @@ const start = () =>
                 break;
         }
     }
+    console.log('Thanks for hearing my jokes!');
 }
 
 start();
