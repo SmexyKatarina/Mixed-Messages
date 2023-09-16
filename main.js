@@ -49,29 +49,38 @@ const disappointments = [
 const rand = [Math.floor(Math.random() * puns.length), Math.floor(Math.random() * throwbackAnswers.length)];
 rand.push(rand[0]);
 
-const generateNumber = (max) => Math.floor(Math.random * max);
+const generateNumber = (max) => Math.floor(Math.random() * max);
 
 const getRandomElement = (array) => array[generateNumber(array.length)];
+
+const generateJoke = () => `${getRandomElement(responses)}\n${getRandomElement(puns)}\n${getRandomElement(throwbackAnswers)}\n${getRandomElement(punchLine)}`;
 
 const start = () => 
 {
     let repeat = 0;
+    let saidJoke = false;
     while (repeat < 10) 
     {
-        const hearJoke = prompt('Do you want to hear a joke?');
+        const hearJoke = prompt(!saidJoke ? 'Do you want to hear a joke? ' : 'Do you want to hear another one? ');
         switch (hearJoke) 
         {
             case 'yes':
             case 'y':
-                console.log(`${getRandomElement(responses)}\n${getRandomElement(puns)}\n${getRandomElement(throwbackAnswers)}\n${getRandomElement(punchLine)}`);
+                console.log(generateJoke());
+                saidJoke = true;
+                repeat++;
                 break;
             case 'no':
             case 'n':
                 console.log(getRandomElement(disappointments));
+                saidJoke = false;
+                repeat++;
                 break;
             default:
-                console.log(`${hearJoke} isn't a possible input. Acceptable inputs are: yes/y and no/n.`);
+                console.log(`'${hearJoke}' isn't a possible input. Acceptable inputs are: yes/y and no/n.`);
                 break;
         }
     }
 }
+
+start();
